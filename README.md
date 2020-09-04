@@ -20,3 +20,7 @@
 8. docker file contains the configuration for docker image.
 9. requirements.txt contains all the libraries required for accessing docker-image.
 10. weights is a directory which is now empty but this where the trained weights will be saved.
+
+## About the architecture :
+Please find the image attached "Architecture.png" for understanding what I did.
+#### I used pretrained-Bert for finding the feature-embeddings from the text which was further processed to series of self-attention layers to find the encodings for each of the sentence pair individually, followed by cross-attention layer which would let both the sequences in the pair to attend each other's feature knowledge. I used Bahdanau's attention in the cross-attention layer. The output after these steps are max-pooled to get the most discriminative features. The pooled representations are fused by various rules like hadamard-product, average, tanh, difference etc, which are concatenated to form a fixed size vector. I further applied a linear layer which maps the features into 1x1 matrix, followed by a sigmoidal layer. The threshold for making decision was kept 0.5 and loss was minimized using binary-cross-entropy objective.
