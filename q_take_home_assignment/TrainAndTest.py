@@ -100,7 +100,7 @@ def TestOnRandomData(s1,s2):
     checkpnt = torch.load(PATH)
     model.load_state_dict(checkpnt["model_state_dict"])
     pred = model(s1,s2)[0]
-    return float(int(pred) > threshold)
+    return 1 if threshold<int(pred) else 0
 
 # train_tup = train(epochs, learning_rate)
 # test_tup = TestOnData()
